@@ -8,7 +8,7 @@ This is a small, festive website created for HackClub's Christmas event. The pro
 - 🛠 Built with plain HTML, CSS, and JavaScript
 
 ## Preview
-Check out the website in your browser to experience the Christmas spirit!
+Check out the website here: [https://jovantan88.github.io/Christmas/](https://jovantan88.github.io/Christmas/)
 
 ## Getting Started
 
