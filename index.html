@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christmas Memory Game</title>
+
+  <style>
+    :root {
+      --tw-border-opacity: 1;
+      --tw-bg-opacity: 1;
+      --tw-text-opacity: 1;
+      --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-ring-shadow: 0 0 #0000;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      /* Disallow scrolling on the page */
+      overflow: hidden;
+      /* Festive gradient background */
+      background: linear-gradient(to bottom, #ECFCCB 0%, #DCFCE7 40%, #FCE7F3 100%);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Utility classes */
+    .container {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        max-width: 640px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: 768px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1024px;
+      }
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .bg-white {
+      background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+    }
+
+    .bg-green-700 {
+      background-color: rgba(4, 120, 87, var(--tw-bg-opacity));
+    }
+
+    .bg-blue-600 {
+      background-color: rgba(37, 99, 235, var(--tw-bg-opacity));
+    }
+
+    .hover\:bg-blue-700:hover {
+      background-color: rgba(29, 78, 216, var(--tw-bg-opacity));
+    }
+
+    .text-white {
+      color: rgba(255, 255, 255, var(--tw-text-opacity));
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-red-600 {
+      color: rgba(220, 38, 38, var(--tw-text-opacity));
+    }
+
+    .text-gray-700 {
+      color: rgba(55, 65, 81, var(--tw-text-opacity));
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .text-3xl {
+      font-size: 1.875rem;
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .font-semibold {
+      font-weight: 600;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .leading-tight {
+      line-height: 1.25;
+    }
+
+    .p-2 {
+      padding: 0.5rem;
+    }
+
+    .p-4 {
+      padding: 1rem;
+    }
+
+    .p-6 {
+      padding: 1.5rem;
+    }
+
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    .mt-6 {
+      margin-top: 1.5rem;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    .rounded {
+      border-radius: 0.25rem;
+    }
+
+    .shadow {
+      box-shadow: var(--tw-shadow);
+    }
+
+    .hover\:shadow-lg:hover {
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .max-w-xl {
+      max-width: 36rem;
+    }
+
+    .min-h-screen {
+      min-height: 100vh;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .top-0 {
+      top: 0;
+    }
+
+    .left-0 {
+      left: 0;
+    }
+
+    .right-0 {
+      right: 0;
+    }
+
+    .bottom-0 {
+      bottom: 0;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .gap-2 {
+      grid-gap: 0.5rem;
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sm\:grid-cols-4 {
+      display: grid;
+    }
+
+    @media (min-width: 640px) {
+      .sm\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .cursor-pointer {
+      cursor: pointer;
+    }
+
+    .pointer-events-none {
+      pointer-events: none;
+    }
+
+    .transition {
+      transition: all 0.2s;
+    }
+
+    .duration-300 {
+      transition-duration: 0.3s;
+    }
+
+    .ease-in-out {
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Header / Hero styling (new color) */
+    header {
+      background-color: #b91c1c;
+      /* A different color for the hero section */
+    }
+
+    header h1 {
+      color: #fff;
+      /* White text for contrast */
+    }
+
+    /* Snowflake effect */
+    .snowflake {
+      position: absolute;
+      color: #fff;
+      font-size: 1.2rem;
+      z-index: 9999;
+    }
+
+    @keyframes snow-fall {
+      0% {
+        transform: translateY(-100%);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    /* Card flip animation classes */
+    .card {
+      perspective: 800px;
+      /* for the 3D flip effect */
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.25rem;
+      overflow: hidden;
+      /* Hide overflowing parts of the image */
+    }
+
+    .front-face {
+      background-color: #ffffff;
+      transform: rotateY(180deg);
+    }
+
+    .back-face {
+      font-size: 2rem;
+      background-color: #fca5a5;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Cover the entire container */
+    }
+
+    /* Victory Modal styling */
+    #victoryModal {
+      display: none;
+      /* hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #victoryModalContent {
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    #victoryModalContent h2 {
+      margin-bottom: 1rem;
+    }
+
+    #victoryModalContent button {
+      margin: 0.5rem;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-center items-center">
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="w-full p-6 flex flex-col justify-center items-center text-center">
+    <h1 class="text-4xl font-bold leading-tight">
+      A Joyful Christmas Memory Game!
+    </h1>
+    <p class="text-xl mt-4 text-white" style="text-shadow: 1px 1px 2px #555;">
+      Test your memory skills and enjoy a festive mood!
+    </p>
+  </header>
+
+  <main class="container flex-1 flex flex-col justify-center items-center relative p-4">
+
+    <div id="snowflakeContainer" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+
+    <section class="w-full max-w-xl bg-white shadow rounded p-4 mt-8">
+      <h2 class="text-2xl font-bold text-center mb-4">Christmas Memory Game</h2>
+      <p class="text-center text-gray-700 mb-4">
+        Match all the pairs to win. Click on any two cards to see if they match!
+      </p>
+
+      <div id="gameGrid" class="grid sm:grid-cols-4 grid-cols-3 gap-2">
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="text-lg font-medium mb-2">
+          Moves: <span id="movesCount" class="font-bold">0</span>
+        </p>
+        <button class="bg-blue-600 text-white font-bold rounded p-2 hover:bg-blue-700 hover:shadow-lg"
+          onclick="startMemoryGame()">
+          Restart Game
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div id="victoryModal" class="flex">
+    <div id="victoryModalContent">
+      <h2 class="text-2xl font-bold">Congratulations!</h2>
+      <p>You matched all pairs!</p>
+      <div>
+        <button class="bg-blue-600 text-white font-bold rounded p-2 hover:bg-blue-700"
+          onclick="handleRestart()">Restart</button>
+        <button class="bg-gray-400 text-black font-bold rounded p-2 hover:shadow-lg"
+          onclick="hideVictoryModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="w-full p-4 bg-green-700 text-white text-center mt-8">
+    <p>© 2024 Christmas Game by Jovan - Enjoy the Holidays!</p>
+  </footer>
+
+  <script>
+    const cardImages = [
+      {
+        name: 'santa',
+        img: 'images/santa.jpg'
+      },
+      {
+        name: 'tree',
+        img: 'images/tree.jpg'
+      },
+      {
+        name: 'snowman',
+        img: 'images/snowman.jpg'
+      },
+      {
+        name: 'bell',
+        img: 'images/bell.jpg'
+      },
+      {
+        name: 'stocking',
+        img: 'images/stocking.jpg'
+      },
+      {
+        name: 'candycane',
+        img: 'images/candycane.jpg'
+      }
+    ];
+
+    const totalPairs = cardImages.length; // 6 in this case
+    let firstCard = null;
+    let secondCard = null;
+    let lockBoard = false;
+    let moves = 0;
+    let matchedPairs = 0;
+
+    const snowflakeChars = ['❅', '❆', '❄', '*', '✻', '✼'];
+    function createSnowflake() {
+      const snowflakeContainer = document.getElementById('snowflakeContainer');
+      if (!snowflakeContainer) return;
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.animation = `snow-fall ${5 + Math.random() * 5}s linear infinite`;
+      snowflake.style.fontSize = (14 + Math.random() * 24) + 'px';
+      snowflakeContainer.appendChild(snowflake);
+
+      setTimeout(() => {
+        if (snowflakeContainer.contains(snowflake)) {
+          snowflakeContainer.removeChild(snowflake);
+        }
+      }, 10000);
+    }
+    setInterval(createSnowflake, 400);
+
+    function startMemoryGame() {
+      const gameGrid = document.getElementById('gameGrid');
+      if (!gameGrid) return;
+
+      moves = 0;
+      matchedPairs = 0;
+      document.getElementById('movesCount').textContent = moves;
+      firstCard = null;
+      secondCard = null;
+      lockBoard = false;
+
+      hideVictoryModal();
+
+      const gameData = [...cardImages, ...cardImages]; // Duplicate the array
+
+      gameData.sort(() => 0.5 - Math.random());
+
+      gameGrid.innerHTML = '';
+
+      gameData.forEach((cardItem, index) => {
+        const card = document.createElement('div');
+        card.classList.add('card', 'cursor-pointer');
+        card.setAttribute('data-name', cardItem.name);
+        card.setAttribute('data-index', index);
+        card.style.height = '100px';
+
+        const cardInner = document.createElement('div');
+        cardInner.classList.add('card-inner');
+
+        const backFace = document.createElement('div');
+        backFace.classList.add('card-face', 'back-face');
+        backFace.textContent = '❄';
+
+        const frontFace = document.createElement('div');
+        frontFace.classList.add('card-face', 'front-face');
+        const faceImg = document.createElement('img');
+        faceImg.src = cardItem.img;
+        faceImg.alt = cardItem.name;
+        faceImg.classList.add('card-image'); 
+        frontFace.appendChild(faceImg);
+
+        cardInner.appendChild(backFace);
+        cardInner.appendChild(frontFace);
+
+        card.addEventListener('click', flipCard);
+
+        card.appendChild(cardInner);
+        gameGrid.appendChild(card);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === firstCard) return; 
+
+      this.classList.add('flipped');
+
+      if (!firstCard) {
+        firstCard = this;
+      } else {
+        secondCard = this;
+        lockBoard = true;
+        moves++;
+        document.getElementById('movesCount').textContent = moves;
+        checkForMatch();
+      }
+    }
+
+    function checkForMatch() {
+      const firstCardName = firstCard.getAttribute('data-name');
+      const secondCardName = secondCard.getAttribute('data-name');
+      if (firstCardName === secondCardName) {
+        disableCards();
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      setTimeout(() => {
+        firstCard.removeEventListener('click', flipCard);
+        secondCard.removeEventListener('click', flipCard);
+
+        matchedPairs++;
+        if (matchedPairs === totalPairs) {
+          showVictoryModal();
+        }
+
+        resetBoard();
+      }, 500);
+    }
+
+    function unflipCards() {
+      setTimeout(() => {
+        firstCard.classList.remove('flipped');
+        secondCard.classList.remove('flipped');
+        resetBoard();
+      }, 1000);
+    }
+
+    function resetBoard() {
+      [firstCard, secondCard] = [null, null];
+      lockBoard = false;
+    }
+
+    /* Victory Modal Controls */
+    function showVictoryModal() {
+      document.getElementById('victoryModal').style.display = 'flex';
+    }
+    function hideVictoryModal() {
+      document.getElementById('victoryModal').style.display = 'none';
+    }
+    function handleRestart() {
+      hideVictoryModal();
+      startMemoryGame();
+    }
+
+    window.addEventListener('DOMContentLoaded', startMemoryGame);
+  </script>
+</body>
+
+</html>
